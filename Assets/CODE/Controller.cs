@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Controller
-{    
+{   /* 
     public static float Horizontal()
     {
         return Input.GetAxisRaw("Horizontal");     
@@ -63,5 +63,5 @@ public static class Controller
     public static float MouseWheel()
     {
         return Input.mouseScrollDelta.y;
-    }
+    }*/
 }

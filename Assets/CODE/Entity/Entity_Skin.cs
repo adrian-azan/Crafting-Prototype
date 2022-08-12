@@ -7,9 +7,6 @@ public class Entity_Skin : MonoBehaviour
 {
     private List<Renderer> _Render;
 
-    [Range(0.0f, 1.0f)]
-    public float[] color;
-
 
     public void Disable()
     {
@@ -27,13 +24,13 @@ public class Entity_Skin : MonoBehaviour
 
     private void Awake()
     {
-        _Render = GetComponentsInChildren<MeshRenderer>().ToList<Renderer>();                
+        _Render = GetComponentsInChildren<MeshRenderer>().ToList<Renderer>();           
     }
 
    
     void Update()
     {
-        
+       
     }
 
 }

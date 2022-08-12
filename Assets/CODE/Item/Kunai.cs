@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kunai : Entity, IUseable
+public class Kunai : Item, IItem, IUseable
 {
+
     public new void Awake()
     {
         base.Awake();

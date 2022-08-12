@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public interface IConsumable
+public interface IConsumable : IItem
 {    
    public IEnumerator Consume(Player player);  
 }

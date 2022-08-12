@@ -44,10 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bc5b83133e0db4486ffda2c2698b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color:
-  - 0.777
-  - 0.672
-  - 0.572
 --- !u!1 &4830774183575243735
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +58,7 @@ GameObject:
   - component: {fileID: -900107829301484169}
   - component: {fileID: 7902362518222687463}
   m_Layer: 0
-  m_Name: Entity
+  m_Name: Mechanical_Entity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,3 +332,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Controller: {fileID: 0}
   _Velocity: {x: 0, y: 0, z: 0}
+  _Gravity: 0

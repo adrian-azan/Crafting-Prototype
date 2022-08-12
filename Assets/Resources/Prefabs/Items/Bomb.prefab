@@ -179,6 +179,7 @@ MonoBehaviour:
   _Controller: {fileID: 0}
   _Animator: {fileID: 0}
   _Health: 0
+  _Name: Bomb
 --- !u!1001 &9071171618921783081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,6 +234,14 @@ PrefabInstance:
     - target: {fileID: 4830774183575243735, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_Name
       value: Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8151823776513625083, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 39cd79dbd5311e34dabefc09f7b9db46, type: 2}
+    - target: {fileID: 8151823776513625083, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8695415827546488911, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_Materials.Array.data[0]

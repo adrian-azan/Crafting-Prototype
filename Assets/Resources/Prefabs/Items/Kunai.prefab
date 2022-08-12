@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d6ad8de656e2d45885b9246db0e51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityCollider: {fileID: 0}
-  EntitySkin: {fileID: 0}
+  _Collider: {fileID: 0}
+  _Skin: {fileID: 0}
   _Controller: {fileID: 0}
+  _Animator: {fileID: 0}
+  _Health: 0
+  _Name: Kunai
 --- !u!1001 &4203084454547243977
 PrefabInstance:
   m_ObjectHideFlags: 0

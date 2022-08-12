@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : Entity, IConsumable
+public class Bomb : Item, IItem, IConsumable
 {
+
+
     IEnumerator IConsumable.Consume(Player player)
     {
         SnapTo(player.transform.position + Vector3.forward);                  
@@ -25,7 +27,7 @@ public class Bomb : Entity, IConsumable
 
          _Animator.Speed(6);
          yield return new WaitForSeconds(1);
-        _Animator.SetBool("Dead",true);
+        _Animator.SetBool("Detonate",true);
 
         yield return new WaitUntil(() => _Animator.IsState("EXIT"));
         

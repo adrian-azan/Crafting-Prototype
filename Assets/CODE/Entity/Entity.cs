@@ -66,15 +66,15 @@ public class Entity : MonoBehaviour
 
     public void SnapTo(Vector3 newPosition)
     {
-        _Controller.Disable();
+        _Controller?.Disable();
         transform.position = newPosition;
-        _Controller.Enable();
+        _Controller?.Enable();
     }
 
     public void RotateAround(Vector3 point, Vector3 axis, float angle)
     {
-        _Controller.Disable();
+        _Controller?.Disable();
         transform.RotateAround(point, axis, angle);
-        _Controller.Enable();       
+        _Controller?.Enable();       
     }
 }

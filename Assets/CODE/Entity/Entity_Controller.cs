@@ -7,10 +7,10 @@ public class Entity_Controller : MonoBehaviour
     public CharacterController _Controller;
     public Vector3 _Velocity;
     protected float _Speed;
-    protected float _Gravity;
+    public float _Gravity;
     protected float _Direction;
     
-      public void Disable()
+    public void Disable()
     {
         if (_Controller == null)
             return;
@@ -28,6 +28,7 @@ public class Entity_Controller : MonoBehaviour
     {
         _Controller = GetComponentInParent<CharacterController>();
         _Velocity = Vector3.zero;
+        _Gravity = 0;
     }
   
     protected void FixedUpdate()
@@ -57,6 +58,12 @@ public class Entity_Controller : MonoBehaviour
         _Velocity.z = Mathf.RoundToInt(_Velocity.z * Mathf.Sin(_Direction) * scale * _Speed);      
     }
 
+    public void SetVelocity(Vector3 velocity)
+    {
+        velocity.Normalize();
+        _Velocity = velocity;
+    }    
+
      public void Turn(Vector3 dir, float step = 10)
     {   
         if (dir == Vector3.zero)
@@ -69,11 +76,11 @@ public class Entity_Controller : MonoBehaviour
     
 
      public void SetDirection(float angle)
-    {
+    {        
         angle = Mathf.Deg2Rad * angle;
         angle = Mathf.Round(angle * 10.0f) * 0.1f;
       
-        _Direction = angle;
+        _Direction = angle;        
     }
 
 
