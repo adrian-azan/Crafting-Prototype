@@ -10,12 +10,14 @@ public class Player_Controller : Entity_Controller
     private Vector3 _Vel;
     public PlayerInput _Pad;
     private Player _Player;
+    private Inventory _Inventory;
     
     new void Awake()
     {
         base.Awake();
         _Animator = GetComponentInParent<Animator>();  
         _Player = GetComponentInParent<Player>();
+        _Inventory = _Player.GetComponentInChildren<Inventory>();
         _Speed = 2;
         _Pad = GetComponent<PlayerInput>();
         
@@ -23,6 +25,10 @@ public class Player_Controller : Entity_Controller
         if (_Pad == null)
             Debug.Log("Not Connected");
     }
+    new void FixedUpdate()
+    {
+        base.FixedUpdate();   
+    }        
 
     public void OnDash(InputValue input)
     {       
@@ -31,7 +37,19 @@ public class Player_Controller : Entity_Controller
 
     public void OnEquipmentNext(InputValue input)
     {
+        _Inventory.Next();
         Debug.Log("Next");
+    }
+
+    public void OnEquipmentPrev(InputValue input)
+    {
+        _Inventory.Prev();
+        Debug.Log("Prev"); 
+    }
+
+    public void OnUse(InputValue input)
+    {
+        _Inventory.Create();
     }
 
     public void OnMove(InputValue input)
@@ -54,10 +72,4 @@ public class Player_Controller : Entity_Controller
         _Facing = new Vector3(facing.x,0,facing.y);        
         Turn(_Facing);
     }
-
-
-    new void FixedUpdate()
-    {
-        base.FixedUpdate();   
-    }        
 }

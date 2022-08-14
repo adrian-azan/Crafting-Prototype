@@ -12,30 +12,17 @@ public class Player : Entity
 
     public Light _Light;
     public Vector3 _Facing;
-    public Item[] _Items;
+    
     public Inventory _Inventory;
 
+
+    public Object lastUsed;
 
     public int index;
   
     public new void Awake()
-    {
-        _Inventory = GetComponentInChildren<Inventory>();
-    
-        var itemObjects = Resources.LoadAll<GameObject>("Prefabs/Items");
-        _Items = new Item[itemObjects.Length];
-
-        for (int i = 0; i < itemObjects.Length;i++)
-        {
-            _Items[i] = itemObjects[i].GetComponent<Item>();
-        }
-
-        var test = _Inventory.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-        test.text = _Items[0] == null ? "N/A" : _Items[0]._Name;
-        index = 0;
-        
+    {       
         _Controller = GetComponentInChildren<Player_Controller>();       
-        
     }
 
     protected void Start()
@@ -43,19 +30,7 @@ public class Player : Entity
        
     }
 
-    public void Next()
-    {
-        index ++;
-        index %= _Items.Length;
-        _Inventory.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = _Items[index] == null ? "N/A" : _Items[index]._Name;
-        
-        
-    }
-    public void Prev()
-    {
-         index = index == 0 ? _Items.Length -1 : index-1;
-        _Inventory.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = _Items[index] == null ? "N/A" : _Items[index]._Name;     
-    }
+    
 
     public new void Update()
     {    

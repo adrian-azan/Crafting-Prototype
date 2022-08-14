@@ -47,17 +47,35 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""EquipmentNext"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""8923728e-918e-4491-8e9f-88fa24211ef0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipmentPrev"",
+                    ""type"": ""Button"",
+                    ""id"": ""de07ccaa-4c4a-49a0-8e43-b4754fb6d13c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""fe250fe4-5415-446e-b471-781c2abf8162"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""8af78fe2-8aed-49f3-89ee-39e061ad1c2c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -89,30 +107,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""41dad509-7c35-4ec6-b64f-27b32f7f35c4"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""EquipmentNext"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c8b1e188-3d42-4868-b473-86da69c6ec1b"",
-                    ""path"": ""<DualShockGamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1bd6d06a-fe4b-4f6d-b736-f392541d831b"",
-                    ""path"": ""<Keyboard>/rightShift"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -128,6 +124,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d550849c-0330-4121-8824-d2446e4e5643"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipmentPrev"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1227530a-3a2e-408f-903d-52d6dee7de66"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -153,7 +171,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_EquipmentNext = m_Player.FindAction("EquipmentNext", throwIfNotFound: true);
+        m_Player_EquipmentPrev = m_Player.FindAction("EquipmentPrev", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,7 +236,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_EquipmentNext;
+    private readonly InputAction m_Player_EquipmentPrev;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Use;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -224,7 +246,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @EquipmentNext => m_Wrapper.m_Player_EquipmentNext;
+        public InputAction @EquipmentPrev => m_Wrapper.m_Player_EquipmentPrev;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -243,9 +267,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @EquipmentNext.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipmentNext;
                 @EquipmentNext.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipmentNext;
                 @EquipmentNext.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipmentNext;
+                @EquipmentPrev.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipmentPrev;
+                @EquipmentPrev.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipmentPrev;
+                @EquipmentPrev.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipmentPrev;
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -259,9 +289,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @EquipmentNext.started += instance.OnEquipmentNext;
                 @EquipmentNext.performed += instance.OnEquipmentNext;
                 @EquipmentNext.canceled += instance.OnEquipmentNext;
+                @EquipmentPrev.started += instance.OnEquipmentPrev;
+                @EquipmentPrev.performed += instance.OnEquipmentPrev;
+                @EquipmentPrev.canceled += instance.OnEquipmentPrev;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
             }
         }
     }
@@ -280,6 +316,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnEquipmentNext(InputAction.CallbackContext context);
+        void OnEquipmentPrev(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
     }
 }

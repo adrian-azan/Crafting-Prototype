@@ -25,17 +25,35 @@
                 },
                 {
                     "name": "EquipmentNext",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "8923728e-918e-4491-8e9f-88fa24211ef0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EquipmentPrev",
+                    "type": "Button",
+                    "id": "de07ccaa-4c4a-49a0-8e43-b4754fb6d13c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Dash",
                     "type": "Button",
                     "id": "fe250fe4-5415-446e-b471-781c2abf8162",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "8af78fe2-8aed-49f3-89ee-39e061ad1c2c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -67,30 +85,8 @@
                 },
                 {
                     "name": "",
-                    "id": "41dad509-7c35-4ec6-b64f-27b32f7f35c4",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EquipmentNext",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c8b1e188-3d42-4868-b473-86da69c6ec1b",
-                    "path": "<DualShockGamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1bd6d06a-fe4b-4f6d-b736-f392541d831b",
-                    "path": "<Keyboard>/rightShift",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -106,6 +102,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d550849c-0330-4121-8824-d2446e4e5643",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipmentPrev",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1227530a-3a2e-408f-903d-52d6dee7de66",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

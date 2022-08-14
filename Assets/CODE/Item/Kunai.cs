@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kunai : Item, IItem, IUseable
+public class Kunai : Item, IUseable
 {
 
     public new void Awake()
@@ -24,7 +24,7 @@ public class Kunai : Item, IItem, IUseable
         _Controller.SetDirection(angle+90);
         _Controller.SetVelocity();        
         
-        return null;
+        yield return null;
     }
 
     public void OnControllerColliderHit(ControllerColliderHit hit)

@@ -1,5 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3833607016579208556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822799063777607724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6e70732aa34254e926fa2e445ffd1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Collider: {fileID: 0}
+  _Skin: {fileID: 0}
+  _Controller: {fileID: 0}
+  _Animator: {fileID: 0}
+  _Health: 0
+  _Name: Hook
+  piece: {fileID: 8431305691407089967, guid: fe661f0305b554e4d814002f310d36ac, type: 3}
+--- !u!114 &8230617298099240244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822799063777607724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37d47d8d00df734d9a3b376c89bf487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Collider: {fileID: 0}
+  _Skin: {fileID: 0}
+  _Controller: {fileID: 0}
+  _Animator: {fileID: 0}
+  _Health: 0
+  _Name: Hook
 --- !u!1001 &5215573972856097787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,6 +47,18 @@ PrefabInstance:
     - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53,7 +102,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4830774183575243735, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_Name
-      value: Mechanical_Entity
+      value: Hook
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695415827546488911, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e600726f953461d47b9c35d6daf78d52, type: 2}
+    - target: {fileID: 9097696539150599635, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e288147a419206c4fab2689da8f281de, type: 3}
+--- !u!1 &822799063777607724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4830774183575243735, guid: e288147a419206c4fab2689da8f281de, type: 3}
+  m_PrefabInstance: {fileID: 5215573972856097787}
+  m_PrefabAsset: {fileID: 0}
