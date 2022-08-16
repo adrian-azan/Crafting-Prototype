@@ -6,24 +6,33 @@ using DiggyDigs.Common.Tools;
 public class Hook : Item, IConsumable
 {
 
-    Transform compliment;
+    public Transform compliment;
     public Object piece;
 
-    public IEnumerator Consume(Player player)
+    private Coroutine deathTimer;
+
+    public IEnumerator Consume(Inventory inventory)
     {
-        SnapTo(player.transform.position + Vector3.forward);                  
-        var angle = player.transform.eulerAngles.y; 
+
+        if (compliment == null)
+        {
+            var other = Instantiate(this);
+            other.compliment = this.transform;
+            inventory._ItemQueue.Enqueue(other);
+        }
+
+        SnapTo(inventory.transform.position + Vector3.forward);                  
+        var angle = inventory.transform.eulerAngles.y; 
 
         if (angle < 0)
             angle = 360 + angle;
       
-        RotateAround(player.transform.position, Vector3.up, angle);
+        RotateAround(inventory.transform.position, Vector3.up, angle);
 
         _Controller.SetDirection(angle+90);
         _Controller.SetVelocity();  
 
-        compliment = player.transform;
-
+        deathTimer = StartCoroutine(DeathTimer(inventory));
         yield return null;
     }
 
@@ -40,17 +49,29 @@ public class Hook : Item, IConsumable
             transform.SetParent(target.transform);
         }    
 
-        StartCoroutine(Connect());      
+        StopCoroutine(deathTimer);
+        if (compliment != null)
+            StartCoroutine(Connect());      
     }
 
     public IEnumerator Connect()
     {
-        var rise = compliment.localPosition.z - transform.localPosition.z;
-        var run = compliment.localPosition.x - transform.localPosition.x;
+        
+        yield return new WaitWhile(() => compliment.transform.parent == null);
+        var rise = compliment.position.z - transform.position.z;
+        var run = compliment.position.x - transform.position.x;
         var slope = Mathf.Abs(rise / run);
 
-        var start = transform.localPosition;
-        var end = compliment.localPosition;
+        var start = transform.position;
+        var end = compliment.position;
+
+        
+        if (Tools.DistanceToXZ(start,end) > 20)
+        {
+            Destroy(compliment.gameObject);
+            Destroy(this.gameObject);
+            yield return null;
+        }
 
         yield return new WaitWhile(() => {
 
@@ -58,9 +79,25 @@ public class Hook : Item, IConsumable
             start.z += Mathf.Sign(rise) * slope * .25f;
 
             Instantiate(piece, new Vector3(start.x, start.y,start.z), Quaternion.identity);
-            return Tools.DistanceToXZ(start,end) > 1;
+            return Tools.DistanceToXZ(start,end) > .2f;
         });
     }
+
+    public IEnumerator DeathTimer(Inventory inventory)
+    {
+        float start = Time.time;
+        yield return new WaitUntil(() => {
+            Debug.Log(Time.time - start);
+            return Time.time - start > 10;
+            });
+        
+        if (compliment != null)
+            Destroy(compliment.gameObject);
+        
+        if (this != null)
+            Destroy(this.gameObject);        
+    }
+
 
     // Start is called before the first frame update
     public new void Awake()

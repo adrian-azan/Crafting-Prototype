@@ -11,15 +11,15 @@ public class Kunai : Item, IUseable
         _Controller.SetSpeed(10);
         _Controller.SetGravity(.05f);
     }
-    public IEnumerator Use(Player player)
+    public IEnumerator Use(Inventory inventory)
     {        
-        SnapTo(player.transform.position + Vector3.forward);                  
-        var angle = player.transform.eulerAngles.y; 
+        SnapTo(inventory.transform.position + Vector3.forward);                  
+        var angle = inventory.transform.eulerAngles.y; 
 
         if (angle < 0)
             angle = 360 + angle;
       
-        RotateAround(player.transform.position, Vector3.up, angle);
+        RotateAround(inventory.transform.position, Vector3.up, angle);
 
         _Controller.SetDirection(angle+90);
         _Controller.SetVelocity();        

@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IUseable : IItem
 {    
-   public IEnumerator Use(Player player);  
+   public IEnumerator Use(Inventory inventory);  
 }

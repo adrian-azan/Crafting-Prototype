@@ -6,15 +6,15 @@ public class Bomb : Item, IConsumable
 {
 
 
-    IEnumerator IConsumable.Consume(Player player)
+    IEnumerator IConsumable.Consume(Inventory inventory)
     {
-        SnapTo(player.transform.position + Vector3.forward);                  
-        var angle = player.transform.eulerAngles.y; 
+        SnapTo(inventory.transform.position + Vector3.forward);                  
+        var angle = inventory.transform.eulerAngles.y; 
 
         if (angle < 0)
             angle = 360 + angle;
      
-        RotateAround(player.transform.position, Vector3.up, angle);            
+        RotateAround(inventory.transform.position, Vector3.up, angle);            
       
         _Animator.Play("CountDown");
         yield return new WaitWhile(() => _Animator.IsState("Idle"));

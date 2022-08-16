@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IConsumable : IItem
 {    
-   public IEnumerator Consume(Player player);  
+   public IEnumerator Consume(Inventory inventory);  
 }

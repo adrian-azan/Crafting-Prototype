@@ -11,7 +11,7 @@ public class Pick : Entity, IUseable
         Disable();
         
     }
-    public IEnumerator Use(Player player)
+    public IEnumerator Use(Inventory inventory)
     {                            
         Enable();
 
