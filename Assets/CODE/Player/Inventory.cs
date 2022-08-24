@@ -10,11 +10,13 @@ public class Inventory : MonoBehaviour
     public Item[] _Items;
     public Queue<Item> _ItemQueue;
     public Transform _Root;
+    public Player _Player;
     public int index;
 
     public void Awake()
     {
-        _Root = GetComponentInParent<Player>().transform;     
+        _Player = GetComponentInParent<Player>();
+        _Root = _Player.transform;     
         
         _ItemQueue = new Queue<Item>();
         var itemObjects = Resources.LoadAll<GameObject>("Prefabs/Items");
@@ -54,11 +56,14 @@ public class Inventory : MonoBehaviour
          else
             t = _ItemQueue.Dequeue();
 
+
         var item = t.GetComponent<IItem>();
+       
         if (item is IConsumable)  
             StartCoroutine(((IConsumable)item).Consume(this)); 
         else if (item is IUseable)
             StartCoroutine(((IUseable)item).Use(this)); 
+     
     }
 
     public void Update()

@@ -150,6 +150,54 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Aiming"",
+            ""id"": ""a63284c5-1e39-4641-99dd-20b37e8ba722"",
+            ""actions"": [
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""e2be66cf-51b6-4221-8347-d88f77a10c3d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Release"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c7a9676-7fb1-448f-8427-d2465e1c5d1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""397e3163-2b86-480f-ab47-7cd2f043fcbf"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2fd8d6b-16fd-4b8d-b5e6-57bbcaa44bea"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -174,6 +222,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_EquipmentPrev = m_Player.FindAction("EquipmentPrev", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        // Aiming
+        m_Aiming = asset.FindActionMap("Aiming", throwIfNotFound: true);
+        m_Aiming_Aim = m_Aiming.FindAction("Aim", throwIfNotFound: true);
+        m_Aiming_Release = m_Aiming.FindAction("Release", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -302,6 +354,47 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Aiming
+    private readonly InputActionMap m_Aiming;
+    private IAimingActions m_AimingActionsCallbackInterface;
+    private readonly InputAction m_Aiming_Aim;
+    private readonly InputAction m_Aiming_Release;
+    public struct AimingActions
+    {
+        private @PlayerControls m_Wrapper;
+        public AimingActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Aim => m_Wrapper.m_Aiming_Aim;
+        public InputAction @Release => m_Wrapper.m_Aiming_Release;
+        public InputActionMap Get() { return m_Wrapper.m_Aiming; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(AimingActions set) { return set.Get(); }
+        public void SetCallbacks(IAimingActions instance)
+        {
+            if (m_Wrapper.m_AimingActionsCallbackInterface != null)
+            {
+                @Aim.started -= m_Wrapper.m_AimingActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_AimingActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_AimingActionsCallbackInterface.OnAim;
+                @Release.started -= m_Wrapper.m_AimingActionsCallbackInterface.OnRelease;
+                @Release.performed -= m_Wrapper.m_AimingActionsCallbackInterface.OnRelease;
+                @Release.canceled -= m_Wrapper.m_AimingActionsCallbackInterface.OnRelease;
+            }
+            m_Wrapper.m_AimingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
+                @Release.started += instance.OnRelease;
+                @Release.performed += instance.OnRelease;
+                @Release.canceled += instance.OnRelease;
+            }
+        }
+    }
+    public AimingActions @Aiming => new AimingActions(this);
     private int m_GamePadSchemeIndex = -1;
     public InputControlScheme GamePadScheme
     {
@@ -319,5 +412,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnEquipmentPrev(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+    }
+    public interface IAimingActions
+    {
+        void OnAim(InputAction.CallbackContext context);
+        void OnRelease(InputAction.CallbackContext context);
     }
 }

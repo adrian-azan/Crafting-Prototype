@@ -6,7 +6,7 @@ public class Entity_Controller : MonoBehaviour
 {
     public CharacterController _Controller;
     public Vector3 _Velocity;
-    protected float _Speed;
+    public float _Speed;
     public float _Gravity;
     protected float _Direction;
     
