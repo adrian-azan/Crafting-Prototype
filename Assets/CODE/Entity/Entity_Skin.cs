@@ -27,6 +27,10 @@ public class Entity_Skin : MonoBehaviour
         _Render = GetComponentsInChildren<MeshRenderer>().ToList<Renderer>();           
     }
 
+    public void SetColor(Color color)
+    {
+        _Render.ForEach(r => r.material.color = color);
+    }
    
     void Update()
     {

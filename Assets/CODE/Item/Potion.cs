@@ -36,7 +36,6 @@ public class Potion : Item, IThrowable
     }
     public IEnumerator Throw()
     {
-
         _Animator.Play("Rise");
 
         _Controller.SetDirection(transform.eulerAngles.y + 90);

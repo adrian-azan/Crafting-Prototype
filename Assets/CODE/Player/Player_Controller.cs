@@ -25,6 +25,7 @@ public class Player_Controller : Entity_Controller
         if (_Pad == null)
             Debug.Log("Not Connected");
     }
+
     new void FixedUpdate()
     {
         base.FixedUpdate();   
@@ -70,6 +71,7 @@ public class Player_Controller : Entity_Controller
     {
         Vector2 facing = input.Get<Vector2>();
         _Facing = new Vector3(facing.x,0,facing.y);        
-        Turn(_Facing);
+        Turn(_Facing,50);
+        Debug.Log("TURNING");
     }
 }

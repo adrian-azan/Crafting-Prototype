@@ -51,19 +51,26 @@ public class Inventory : MonoBehaviour
          if (_Items[index] == null)
             return;
          Item t = null;
-         if (_ItemQueue.Count == 0)
+
+
+      
+
+        if (_ItemQueue.Count == 0)
             t = Instantiate(_Items[index]);
-         else
+        else
             t = _ItemQueue.Dequeue();
 
 
         var item = t.GetComponent<IItem>();
-       
-        if (item is IConsumable)  
-            StartCoroutine(((IConsumable)item).Consume(this)); 
+
+        if (item is IConsumable)
+            StartCoroutine(((IConsumable)item).Consume(this));
         else if (item is IUseable)
-            StartCoroutine(((IUseable)item).Use(this)); 
-     
+            StartCoroutine(((IUseable)item).Use(this));
+        else if (item is ITool)
+        {            
+            StartCoroutine(((ITool)item).Use(this));
+        }
     }
 
     public void Update()

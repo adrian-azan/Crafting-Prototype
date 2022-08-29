@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
 
     public GameObject _Unit;
     public Miner _MinerPrefab;
+    public GameObject _Player;
 
     
     private List<Miner> _Miners;
@@ -21,8 +22,10 @@ public class Room : MonoBehaviour
     {       
         _Miners = new List<Miner>();        
         _Miners.Add(new Miner());
-        _Miners.Last().Start(new Vector3(Random.Range(0,100),5,Random.Range(0,100)));
-        
+        _Miners.Last().Start(new Vector3(Random.Range(0,100),1,Random.Range(0,100)));
+         
+       Object p = null;
+
         _Room = new bool[100,100];
 
 
@@ -32,7 +35,6 @@ public class Room : MonoBehaviour
             while (CM.Dead() == false)
             {
                 CM.Update();
-                Debug.Log($"{CM.current.x}:{CM.current.z}");
                 _Room[(int)CM.current.z,(int)CM.current.x] = true;
             }
 
@@ -47,22 +49,26 @@ public class Room : MonoBehaviour
         _TopLeft = transform.position;
         _TopLeft.x -= _Width/2;
         _TopLeft.z -= _Height/2;
-        
+         var buff = 1.1f;
         for (int row = 0; row < 100; row++)
         {
             for (int col = 0; col < 100; col++)
             {               
                 var existing = _Room[row,col];
-
+                var unitPos = new Vector3(_TopLeft.x+(buff*col), _TopLeft.y+2,_TopLeft.z +(buff*row));      
                 if (existing == false)
                 {
+                   
                     //Creation of each wall
-                    var unitPos = new Vector3(_TopLeft.x +col, _TopLeft.y+2,_TopLeft.z +row);                 
+                               
                     var wall = Instantiate<GameObject>(_Unit, unitPos, new Quaternion() );
 
                     //Change color based on position
                    // wall.GetComponentInChildren<Renderer>().material.color = new Color((1.0f/_Width)*col,Mathf.Sin(row/_Width)/2 + .5f ,(1.0f/_Height)*row);
                 }
+
+                else if (p == null)
+                    p = Instantiate(_Player,unitPos, new Quaternion());
             }
         }       
     }

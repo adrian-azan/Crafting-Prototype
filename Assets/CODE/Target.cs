@@ -10,6 +10,9 @@ public class Target : Entity, IDestroyable
     
     public Vector3 _Origin;
     public Vector3 _Velocity;
+
+    public List<Color> colors;
+    public int colorIndex;
     private new void Awake()
     {
 
@@ -18,6 +21,10 @@ public class Target : Entity, IDestroyable
         _Health = 3;       
         _Origin = transform.position;
         _Velocity = new Vector3(0,0,1);
+        _Animator.Disable();
+        colors = new List<Color>{ Color.red,Color.blue,Color.yellow};
+        colorIndex = 0;
+        StartCoroutine(ShiftColor());
     }
   
     // Update is called once per frame
@@ -30,11 +37,19 @@ public class Target : Entity, IDestroyable
         }     
     }
 
+    public IEnumerator ShiftColor()
+    {
+        yield return new WaitForSeconds(2);
+        _Skin.SetColor(colors[(colorIndex++)%3]);
+        StartCoroutine(ShiftColor());
+
+    }
+
     public IEnumerator Destroy()
     {
+        _Animator.Enable();
         _Coroutines["Destroy"] = false;
-        _Animator.Play("Shrink");
-        yield return new WaitUntil(() => _Animator.IsState("EXIT"));     
-        Destroy(gameObject);       
+        _Animator.Play("Destroyed");
+        yield return null;
     }
 }

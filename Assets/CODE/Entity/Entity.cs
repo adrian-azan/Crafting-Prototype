@@ -29,12 +29,13 @@ public class Entity : MonoBehaviour
     {       
         _Collider?.Enable();      
         _Skin?.Enable();       
-      //  _Controller?.Enable();
+        _Controller?.Enable();
 
       //  if(_Animator)
       //      _Animator.enabled = true;
 
     }
+
 
     public void Awake()
     {
@@ -42,26 +43,35 @@ public class Entity : MonoBehaviour
         _Skin = GetComponentInChildren<Entity_Skin>();
         _Controller = GetComponentInChildren<Entity_Controller>();
         _Animator = GetComponent<Entity_Animator>();
-        _Health = Mathf.Infinity;
+        _Health = _Health == 0 ? Mathf.Infinity : _Health;
         _Coroutines = new DefaultDictionary<string, bool>(true);     
     }
 
     public void Update()
     {
+        
+    }
+
+    public IEnumerator TakeDamage(float damage)
+    {
+        if (damage < 0) yield return null;
+        
+        _Health -= damage;
+
         if (_Health <= 0)
         {
-            var destroyable = GetComponent<IDestroyable>();
-            var test = _Coroutines["Destroy"];
-            if (destroyable != null && _Coroutines["Destroy"])
-            {                                
-                StartCoroutine(destroyable.Destroy());
-            }
-            else if (_Coroutines["Destroy"])
+            if (_Animator)
             {
-                Destroy(gameObject);
+                _Animator?.Play("Shrink");
+                yield return new WaitUntil(() => _Animator.IsState("EXIT"));
             }
-            
+            Destroy(this.gameObject);
         }
+        else
+        {
+            _Animator?.Play("Damaged");
+        }
+
     }
 
     public void SnapTo(Vector3 newPosition)
@@ -77,4 +87,5 @@ public class Entity : MonoBehaviour
         transform.RotateAround(point, axis, angle);
         _Controller?.Enable();       
     }
+
 }

@@ -35,7 +35,7 @@ public class Entity_Controller : MonoBehaviour
     {
         Gravity(_Gravity);          
 
-        if (_Controller.enabled == true)
+        if (_Controller?.enabled == true)
             _Controller.Move(_Velocity * Time.fixedDeltaTime);
     }
 

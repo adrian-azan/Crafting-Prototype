@@ -12,6 +12,24 @@ public class Entity_Animator : MonoBehaviour
         _Animator = GetComponent<Animator>();
     }
 
+    public void Disable()
+    {
+        if (_Animator is null)
+            _Animator = GetComponent<Animator>();
+
+       // _Animator.StopPlayback();
+       _Animator.enabled = false;
+    }
+
+    public void Enable()
+    {
+        if (_Animator is null)
+            _Animator = GetComponent<Animator>();
+
+        _Animator.enabled = true;
+        //_Animator.StartPlayback();
+    }
+
     public void Play(string stateName, int layer = 0)
     {        
         _Animator.Play(stateName,layer);

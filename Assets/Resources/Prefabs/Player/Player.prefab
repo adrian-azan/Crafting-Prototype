@@ -132,8 +132,8 @@ MonoBehaviour:
   _LastDirection: {x: 0, y: 0, z: 0}
   _Light: {fileID: 0}
   _Facing: {x: 0, y: 0, z: 0}
-  _Items: []
   _Inventory: {fileID: 0}
+  lastUsed: {fileID: 0}
   index: 0
 --- !u!114 &4474276706563730542
 MonoBehaviour:
@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Controller: {fileID: 0}
   _Velocity: {x: 0, y: 0, z: 0}
+  _Speed: 0
   _Gravity: 0
   _Animator: {fileID: 0}
   _Facing: {x: 0, y: 0, z: 0}
@@ -258,6 +259,14 @@ PrefabInstance:
     - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_LocalPosition.x

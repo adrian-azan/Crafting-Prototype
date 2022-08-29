@@ -27,7 +27,7 @@ public class Bomb : Item, IConsumable
 
          _Animator.Speed(6);
          yield return new WaitForSeconds(1);
-        _Animator.SetBool("Detonate",true);
+        _Animator.SetBool("Dead",true);
 
         yield return new WaitUntil(() => _Animator.IsState("EXIT"));
         
