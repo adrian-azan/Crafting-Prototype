@@ -26,6 +26,11 @@ public class Entity_Collider : MonoBehaviour
         BoxCollider.ForEach(x => x.enabled = true);
     }
 
+    public void Trigger(bool isTrigger)
+    {
+        BoxCollider.ForEach(x => x.isTrigger = isTrigger);
+    }
+
     public void Awake()
     {        
         BoxCollider = GetComponentsInChildren<BoxCollider>().ToList<BoxCollider>();

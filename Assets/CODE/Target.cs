@@ -4,7 +4,7 @@ using UnityEngine;
 
 using DiggyDigs.Common.Tools;
 
-public class Target : Entity, IDestroyable
+public class Target : Entity
 {
     // Start is called before the first frame update
     
@@ -15,7 +15,6 @@ public class Target : Entity, IDestroyable
     public int colorIndex;
     private new void Awake()
     {
-
         base.Awake();
 
         _Health = 3;       
@@ -35,21 +34,16 @@ public class Target : Entity, IDestroyable
         {
             _Velocity *= -1;
         }     
+
     }
+
+
 
     public IEnumerator ShiftColor()
     {
         yield return new WaitForSeconds(2);
         _Skin.SetColor(colors[(colorIndex++)%3]);
         StartCoroutine(ShiftColor());
+    }  
 
-    }
-
-    public IEnumerator Destroy()
-    {
-        _Animator.Enable();
-        _Coroutines["Destroy"] = false;
-        _Animator.Play("Destroyed");
-        yield return null;
-    }
 }

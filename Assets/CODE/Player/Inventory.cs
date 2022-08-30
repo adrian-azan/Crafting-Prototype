@@ -13,6 +13,8 @@ public class Inventory : MonoBehaviour
     public Player _Player;
     public int index;
 
+
+
     public void Awake()
     {
         _Player = GetComponentInParent<Player>();
@@ -36,13 +38,11 @@ public class Inventory : MonoBehaviour
     {
         index ++;
         index %= _Items.Length;
-        GetComponentInChildren<TMPro.TextMeshProUGUI>().text = _Items[index] == null ? "N/A" : _Items[index]._Name;
-        
-        
+        GetComponentInChildren<TMPro.TextMeshProUGUI>().text = _Items[index] == null ? "N/A" : _Items[index]._Name;   
     }
     public void Prev()
     {
-         index = index == 0 ? _Items.Length -1 : index-1;
+        index = index == 0 ? _Items.Length -1 : index-1;
         GetComponentInChildren<TMPro.TextMeshProUGUI>().text = _Items[index] == null ? "N/A" : _Items[index]._Name;     
     }
 
@@ -50,10 +50,7 @@ public class Inventory : MonoBehaviour
     {
          if (_Items[index] == null)
             return;
-         Item t = null;
-
-
-      
+         Item t = null;      
 
         if (_ItemQueue.Count == 0)
             t = Instantiate(_Items[index]);
@@ -67,14 +64,8 @@ public class Inventory : MonoBehaviour
             StartCoroutine(((IConsumable)item).Consume(this));
         else if (item is IUseable)
             StartCoroutine(((IUseable)item).Use(this));
-        else if (item is ITool)
-        {            
+        else if (item is ITool)                    
             StartCoroutine(((ITool)item).Use(this));
-        }
-    }
-
-    public void Update()
-    {     
-       
+        
     }
 }

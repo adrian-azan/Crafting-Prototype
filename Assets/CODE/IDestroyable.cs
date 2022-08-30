@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDestroyable
 {
-    public IEnumerator Destroy();
+    public IEnumerator Drop();
 }

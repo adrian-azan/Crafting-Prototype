@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4442b315698df94ca6fda61d2b32e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityCollider: {fileID: 0}
-  EntitySkin: {fileID: 0}
+  _Collider: {fileID: 0}
+  _Skin: {fileID: 0}
   _Controller: {fileID: 0}
   _Animator: {fileID: 0}
   _Health: 0
+  Drop: {fileID: 6708403543699718609, guid: e6dbe2961b944b045842f25ff27acaf7, type: 3}
   _Origin: {x: 0, y: 0, z: 0}
   _Velocity: {x: 0, y: 0, z: 0}
+  colors: []
+  colorIndex: 0
 --- !u!1001 &7415403415169307537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28,7 +31,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -900107829301484169, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3071562732670752069, guid: e288147a419206c4fab2689da8f281de, type: 3}
       propertyPath: m_RootOrder

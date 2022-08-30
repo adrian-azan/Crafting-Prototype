@@ -133,6 +133,7 @@ MonoBehaviour:
   _Controller: {fileID: 0}
   _Animator: {fileID: 0}
   _Health: 0
+  Drop: {fileID: 6708403543699718609, guid: e6dbe2961b944b045842f25ff27acaf7, type: 3}
 --- !u!114 &7902362518222687463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxCollider:
   - {fileID: 0}
+  _Animator: {fileID: 0}
 --- !u!1 &6764118689192616202
 GameObject:
   m_ObjectHideFlags: 0

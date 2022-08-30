@@ -11,6 +11,8 @@ public class Entity : MonoBehaviour
     public Entity_Animator _Animator;
     public float _Health;
 
+    public GameObject Drop;
+
    
     public DefaultDictionary<string, bool> _Coroutines;
 
@@ -19,10 +21,8 @@ public class Entity : MonoBehaviour
     {     
         _Collider?.Disable();      
         _Skin?.Disable();        
-        _Controller?.Disable();
-
-       // if(_Animator)
-       //     _Animator.enabled = false;
+        _Controller?.Disable();       
+        _Animator?.Disable();     
     }
 
     public void Enable()
@@ -30,10 +30,7 @@ public class Entity : MonoBehaviour
         _Collider?.Enable();      
         _Skin?.Enable();       
         _Controller?.Enable();
-
-      //  if(_Animator)
-      //      _Animator.enabled = true;
-
+        _Animator?.Enable();
     }
 
 
@@ -60,18 +57,17 @@ public class Entity : MonoBehaviour
 
         if (_Health <= 0)
         {
-            if (_Animator)
-            {
-                _Animator?.Play("Shrink");
-                yield return new WaitUntil(() => _Animator.IsState("EXIT"));
-            }
-            Destroy(this.gameObject);
+            _Collider?.Disable();
+            _Controller?.Disable();
+            _Animator?.Disable();
+            var drop = Instantiate(Drop,transform.position, new Quaternion());
+
+            transform.SetParent(drop.transform);                      
         }
         else
         {
             _Animator?.Play("Damaged");
         }
-
     }
 
     public void SnapTo(Vector3 newPosition)
